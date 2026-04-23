@@ -12,6 +12,7 @@ spec:
     - cat
     tty: true
     securityContext:
+      privileged: true
       runAsUser: 0
     volumeMounts:
     - mountPath: /var/run/docker.sock
@@ -48,12 +49,8 @@ spec:
                 container('docker') {
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                         script {
-                            // Safety: Install git and sed in the alpine-based docker container
                             sh "apk add --no-cache git sed"
-                            
-                            // Check if it's .yaml or .yml and update accordingly
                             sh "sed -i 's/tag: .*/tag: ${BUILD_NUMBER}/g' charts/flask-app/values.yml"
-                            
                             sh """
                                 git config user.email "deepakrautel048@gmail.com"
                                 git config user.name "deepakrautel048"
