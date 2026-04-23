@@ -1,0 +1,4 @@
+replicaCount: 2
+image:
+  repository: deepakrautela048/flask-gitops-demo
+  tag: latest  # Jenkins will change this number automatically
