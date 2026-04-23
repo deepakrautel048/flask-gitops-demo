@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            yml '''
+            yaml '''
 apiVersion: v1
 kind: Pod
 spec:
